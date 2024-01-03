@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="sqlField_admin">	
+
+	<!-- q_board -->
+
+	<select id="getAllBoardList" resultType="QBoard">
+		select q_num, q_writer, q_email, q_subject, q_password, q_regdate, q_readcount, q_ref, q_re_step, q_re_level, q_content, q_ip		        
+		from (select rownum as rank, q_num, q_writer, q_email, q_subject, q_password, q_regdate, q_readcount, q_ref, q_re_step, q_re_level, q_content, q_ip
+		from (select q_num, q_writer, q_email, q_subject, q_password, q_regdate, q_readcount, q_ref, q_re_step, q_re_level, q_content, q_ip
+		from q_board
+		<if test="whatColumn=='q_writer'">
+			where q_writer like #{keyword}
+		</if>
+		<if test="whatColumn=='q_subject'">
+			where q_subject like #{keyword}
+		</if>
+		order by q_ref desc, q_re_step asc))
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from q_board 
+		<if test="whatColumn=='q_writer'">
+			where q_writer like #{keyword}
+		</if>
+		<if test="whatColumn=='q_subject'">
+			where q_subject like #{keyword}
+		</if>
+		order by q_num asc
+	</select>
+
+	<select id="selectContent" resultType="QBoard">
+		select * from q_board where q_num = #{q_num}
+	</select>
+	
+	
+	
+	<delete id="deleteBoard">
+		delete from q_board where q_num = #{q_num}
+	</delete>
+	
+	<update id="plusStep">
+		update q_board set q_re_step=q_re_step+1 where q_ref=#{q_ref} and q_re_step>#{q_re_step}
+	</update>
+	
+	<update id="updateReadcount">
+		update q_board set q_readcount=q_readcount+1 where q_num=#{q_num}
+	</update>
+	
+	
+		<insert id="insertReply">
+			insert into q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip,q_type,q_secret) values(qboard_seq.nextval,#{q_writer},#{q_email},#{q_subject},#{q_password},#{q_regdate},#{q_ref},#{q_re_step},#{q_re_level},#{q_content},#{q_ip},#{q_type},#{q_secret})
+		</insert>
+		
+	
+	<!-- c_board -->
+	
+	<select id="getAllBoardListC" resultType="CBoard">
+		select c_num, c_writer, c_email, c_subject, c_password, c_regdate, c_readcount, c_ref, c_re_step, c_re_level, c_content, c_ip		        
+		from (select rownum as rank, c_num, c_writer, c_email, c_subject, c_password, c_regdate, c_readcount, c_ref, c_re_step, c_re_level, c_content, c_ip
+		from (select c_num, c_writer, c_email, c_subject, c_password, c_regdate, c_readcount, c_ref, c_re_step, c_re_level, c_content, c_ip
+		from c_board
+		<if test="whatColumn=='c_writer'">
+			where c_writer like #{keyword}
+		</if>
+		<if test="whatColumn=='c_subject'">
+			where c_subject like #{keyword}
+		</if>
+		order by c_ref desc, c_re_step asc ))
+	</select>
+	
+	<select id="getTotalCountC" resultType="int">
+		select count(*) from c_board 
+		<if test="whatColumn=='c_writer'">
+			where c_writer like #{keyword}
+		</if>
+		<if test="whatColumn=='c_subject'">
+			where c_subject like #{keyword}
+		</if>
+		order by c_num asc
+	</select>
+
+	<select id="selectContentC" resultType="CBoard">
+		select * from c_board where c_num = #{c_num}
+	</select>
+	
+	<select id="getSelectOneC" resultType="CBoard" >
+		select * from c_board where c_num = #{c_num}
+	</select>
+	
+	<delete id="deleteBoardC">
+		delete from c_board where c_num = #{c_num}
+	</delete>
+	
+	<!-- celeb -->
+	
+	<select id="getCeleb" resultType="int">
+		select count(*) from celeb
+		
+		<if test="whatColumn=='cl_color'">
+		where cl_color like #{keyword}
+		</if>
+		<if test="whatColumn=='cl_name'">
+		where cl_name like #{keyword}
+		</if>
+		
+	</select>
+	
+	<select id="getAllCelebList" resultType="celebDao">
+		select * from celeb
+		
+		<if test="whatColumn=='cl_color'">
+		where cl_color like #{keyword}
+		</if>
+		<if test="whatColumn=='cl_name'">
+		where cl_name like #{keyword}
+		</if>
+	    order by cl_num desc
+	</select>
+	
+	<select id="getSelectOneCeleb" resultType="celebDao">
+		select * from celeb
+		where cl_num = #{cl_num}
+	</select>
+	
+	<insert id="insertCeleb">
+		insert into celeb values(celeb_seq.nextval, #{cl_name}, #{cl_image}, #{cl_color})
+	</insert>
+	
+	<delete id="deleteCeleb">
+		delete celeb
+		where cl_num=#{cl_num}
+	</delete>
+	
+	<update id="updateCeleb">
+		update celeb
+		set cl_name=#{cl_name}, cl_image=#{cl_image}, cl_color=#{cl_color}
+		where cl_num=#{cl_num}
+	</update>
+	
+	<!-- company -->
+	<select id="getAllCompany" resultType="myCompany" >
+		select * from company
+		
+		<if test="whatColumn=='cmp_name'">
+		 where cmp_name like #{keyword} 
+		</if>
+		
+		<if test="whatColumn=='cmp_addr'">
+		 where cmp_addr like #{keyword} 
+		</if>
+		
+		<if test="whatColumn=='cmp_station'">
+		 where cmp_station like #{keyword} 
+		</if>
+		
+		<if test="whatColumn=='all'">
+		 where cmp_name like #{keyword} or cmp_station like #{keyword} or cmp_addr like #{keyword} 
+		</if>
+		 order by 
+		<choose>
+			<when test="filter == 'standard'">
+				cmp_num desc
+			</when>
+			<when test="filter == 'cmp_priceDesc'">
+				cmp_price desc, cmp_num desc
+			</when>
+			<when test="filter == 'cmp_priceAsc'">
+				cmp_price asc, cmp_num desc
+			</when>
+			<otherwise>
+				cmp_num desc
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getTotalCountCompany" resultType="int" >
+		select count(*) from company 
+			
+			<if test="whatColumn=='cmp_name'">
+			 where cmp_name like #{keyword} 
+			</if>
+			
+			<if test="whatColumn=='cmp_station'">
+			 where cmp_station like #{keyword} 
+			</if>
+	
+			<if test="whatColumn=='cmp_addr'">
+			 where cmp_addr like #{keyword} 
+			</if>
+			
+			<if test="whatColumn=='all'">
+			 where cmp_name like #{keyword} or cmp_station like #{keyword} or cmp_addr like #{keyword} 
+			</if>
+	</select>
+	
+	<select id="getSelectOneCompany" resultType="myCompany" >
+		select * from company where cmp_num = #{cmp_num}
+	</select>
+	
+	<insert id="insertCompany">
+		insert into company values(cmpseq.nextval, #{cmp_name}, #{cmp_addr}, #{cmp_price}, #{cmp_station}, #{cmp_x}, #{cmp_y})
+	</insert>
+	
+	<delete id="deleteCompany">
+		delete company
+		where cmp_num=#{cmp_num}
+	</delete>
+	
+	<update id="updateCompany">
+		update company
+		set cmp_name=#{cmp_name}, cmp_addr=#{cmp_addr}, cmp_price=#{cmp_price}, cmp_station=#{cmp_station}
+		, cmp_x=#{cmp_x}, cmp_y=#{cmp_y}
+		where cmp_num=#{cmp_num}
+	</update>
+	
+	<!-- users -->
+	<select id="getUsers" resultType="Users">
+		select * from users
+		<if test='keyword != ""'>
+			<if test="whatColumn == 'all'">
+				where (u_id like #{keyword} or
+				u_name like #{keyword} or
+				u_phone like #{keyword} or
+				u_address like #{keyword} or 
+				u_color like #{keyword})
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+			<if test="whatColumn == 'u_name'">
+				where u_name like #{keyword}
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+			<if test="whatColumn == 'u_id'">
+				where u_id like #{keyword}
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+			<if test="whatColumn == 'u_phone'">
+				where u_phone like #{keyword}
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+		</if>
+		<if test='keyword == ""'>
+			<if test='filter == "S" or filter == "N" or filter == "K"'>
+				where u_jointype = #{filter}
+			</if>
+			<if test='filter == "R"'>
+				where u_report not in(0,1,2,3,4,5)
+			</if>
+		</if>
+	</select>
+	<select id="getTotalUserCount" resultType="int">
+		select count(*) from users
+		<if test='keyword != ""'>
+			<if test="whatColumn == 'all'">
+				where (u_id like #{keyword} or 
+				u_name like #{keyword} or 
+				u_phone like #{keyword} or 
+				u_address like #{keyword} or 
+				u_color like #{keyword})
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+			<if test="whatColumn == 'u_name'">
+				where u_name like #{keyword}
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+			<if test="whatColumn == 'u_id'">
+				where u_id like #{keyword}
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+			<if test="whatColumn == 'u_phone'">
+				where u_phone like #{keyword}
+				<if test='filter == "S" or filter == "N" or filter == "K"'>
+					and u_jointype = #{filter}
+				</if>
+				<if test='filter == "R"'>
+					and u_report not in(0,1,2,3,4,5)
+				</if>
+			</if>
+		</if>
+		<if test='keyword == ""'>
+			<if test='filter == "S" or filter == "N" or filter == "K"'>
+				where u_jointype = #{filter}
+			</if>
+			<if test='filter == "R"'>
+				where u_report not in(0,1,2,3,4,5)
+			</if>
+		</if>
+	</select>
+	<select id="getAllRestore" resultType="users.model.RestoreBean">
+		select * from restore order by rs_num desc
+	</select>
+	<select id="getRestoreCount" resultType="int">
+		select count(*) from restore
+	</select>
+	<delete id="deleteUsers">
+		delete users
+		where u_id=#{u_id}
+	</delete>
+	<select id="getUserById" resultType="Users">
+		select * from users
+		where u_id=#{u_id}
+	</select>
+	<update id="updateUsersById">
+		update users
+		set u_name=#{u_name}, u_phone=#{u_phone}, u_email=#{u_email}, u_address=#{u_address}, u_color=#{u_color} 
+		where u_id=#{u_id}
+	</update>
+	<update id="resetReport">
+		update users set u_report = 0 where u_id = #{u_id}
+	</update>
+	<update id="restoreDone">
+		update restore set rs_done = 'Y' where u_id = #{u_id}
+	</update>
+	
+	<!-- product -->
+	
+	<select id="getProducts" resultType="myProduct">
+		select * from product
+		<if test='keyword != null'>
+			<if test="whatColumn == 'all'">
+				where p_brand like '%' || UPPER(#{keyword}) || '%' or
+				p_color like '%' || UPPER(#{keyword}) || '%' or
+				p_name like '%' || UPPER(#{keyword}) || '%'
+			</if>
+			<if test="whatColumn == 'p_brand'">
+				where p_brand like '%' || UPPER(#{keyword}) || '%'
+			</if>
+			<if test="whatColumn == 'p_color'">
+				where p_color like '%' || UPPER(#{keyword}) || '%'
+			</if>
+			<if test="whatColumn == 'p_name'">
+				where p_name like '%' || UPPER(#{keyword}) || '%'
+			</if>
+		</if>
+		order by 
+		<choose>
+			<when test="filter == 'standard'">
+				p_num desc
+			</when>
+			<when test="filter == 'p_stock'">
+				p_stock asc, p_num desc
+			</when>
+			<when test="filter == 'p_salevolume'">
+				p_salevolume desc, p_num desc
+			</when>
+			<when test="filter == 'p_priceDesc'">
+				p_price desc, p_num desc
+			</when>
+			<when test="filter == 'p_priceAsc'">
+				p_price asc, p_num desc
+			</when>
+			<otherwise>
+				p_num desc
+			</otherwise>
+		</choose>
+	</select>
+	<select id="getTotalPrdCount" resultType="int">
+		select count(*) from product
+		<if test='keyword != null'>
+			<if test="whatColumn == 'all'">
+				where (p_brand like '%' || UPPER(#{keyword}) || '%' or 
+				p_name like '%' || UPPER(#{keyword}) || '%' or 
+				p_color like #{keyword})
+			</if>
+			<if test="whatColumn == 'p_brand'">
+				where p_brand like '%' || UPPER(#{keyword}) || '%'
+			</if>
+			<if test="whatColumn == 'p_name'">
+				where p_name like '%' || UPPER(#{keyword}) || '%'
+			</if>
+			<if test="whatColumn == 'p_color'">
+				where p_color like #{keyword}
+			</if>
+		</if>
+	</select>
+	<delete id="deleteProduct">
+		delete product
+		where p_num=#{p_num}
+	</delete>
+	<select id="getProductByNum" resultType="myProduct">
+		select * from product
+		where p_num=#{p_num}
+	</select>
+	<insert id="insertProduct">
+		insert into product
+		values(pro_seq.nextval, #{p_brand}, #{p_name}, #{p_ttlimg}, #{p_dtlimg}, #{p_color}, #{p_price}, #{p_point}, #{p_stock}, #{p_salevolume}, #{p_contents})
+	</insert>
+	<update id="updateProduct">
+		update product
+		set p_brand=#{p_brand}, p_name=#{p_name}, p_ttlimg=#{p_ttlimg}, p_dtlimg=#{p_dtlimg}, 
+		p_color=#{p_color}, p_price=#{p_price}, p_point=#{p_point}, 
+		p_stock=#{p_stock}, p_salevolume=#{p_salevolume}, p_contents=#{p_contents} 
+		where p_num=#{p_num}
+	</update>
+	
+	<!-- order -->
+		<select id="getTotalCountOrder" resultType="int">
+			select count(*) from orders 
+			<if test="whatColumn=='u_id'">
+				where u_id like #{keyword}
+			</if>
+			<if test="whatColumn=='o_date'">
+				where o_date like #{keyword}
+			</if>
+			<if test="whatColumn=='all'">
+				where o_date like #{keyword} or u_id like #{keyword}
+			</if>
+			order by o_num desc
+		</select>
+		
+		<select id="getAllOrder" resultType="mall.model.OrderBean">
+			select * from orders 
+			<if test="whatColumn=='u_id'">
+				where u_id like #{keyword}
+			</if>
+			<if test="whatColumn=='o_date'">
+				where o_date like #{keyword}
+			</if>
+			<if test="whatColumn=='all'">
+				where o_date like #{keyword} or u_id like #{keyword}
+			</if>
+			order by o_num desc
+		</select>
+		
+		<select id="selectOrderStatus" resultType="String">
+			select o_status from orders
+				where o_num = #{o_num}
+		</select>
+		
+		<update id="updateOrderStatus">
+			update orders
+				set o_status='배송완료' where o_num = #{o_num}
+		</update>
+		
+		<select id="getAllOrdersProduct" resultType="mall.model.OrdersProductBean">
+			select * from ordersProduct
+				where o_num = #{o_num}
+		</select>
+		
+		<select id="selectPord" resultType="myProduct">
+			select p_name, p_price, p_num, p_point from product
+				where p_num = #{p_num} 
+		</select> 
+		
+		<select id="getOneOrder" resultType="mall.model.OrderBean">
+			select * from orders
+				where o_num = #{o_num}
+		</select>
+		
+		<update id="updateUsersPoint">
+			update users
+				set u_point = u_point+#{p_point} where u_id = #{u_id}
+		</update>
+	
+	
+	
+	<!-- feedback -->
+		<select id="fb1Select" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content =
+					  '흥미로운 컨텐츠가 부족해요.'
+		</select>
+		
+		<select id="fb2Select" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content =
+					  '웹 사이트를 이용하기가 불편해요.'
+		</select>
+		
+		<select id="fb3Select" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content =
+					  '관리가 잘 되지 않는 것 같아요.'
+		</select>
+		
+		<select id="fb4Select" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content =
+					  '사고 싶은 물품이 없어요.'
+		</select>
+		
+		<select id="fb5Select" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content =
+					  '비매너 사용자를 만났어요.'
+		</select>
+		
+		<select id="fb6Select" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content =
+					  '새 계정을 만들고 싶어요.'
+		</select>
+		
+		<select id="etcSelect" resultType="String">
+				SELECT COUNT(*) FROM feedback
+					WHERE fb_content NOT IN (
+					  '흥미로운 컨텐츠가 부족해요.',
+					  '웹 사이트를 이용하기가 불편해요.',
+					  '관리가 잘 되지 않는 것 같아요.',
+					  '사고 싶은 물품이 없어요.',
+					  '비매너 사용자를 만났어요.',
+					  '새 계정을 만들고 싶어요.'
+					)
+		</select>
+		
+		<!-- member 수  -->
+		
+		<select id="memberSelect" resultType="String">
+				SELECT COUNT(*) FROM users
+		</select>
+		
+		
+		<!-- 상품 수 -->
+		<select id="col1Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '봄 라이트'
+		</select>
+		
+		<select id="col2Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '봄 브라이트'
+		</select>
+		
+		<select id="col3Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '여름 라이트'
+		</select>
+		
+		<select id="col4Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '여름 브라이트'
+		</select>
+		
+		<select id="col5Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '여름 뮤트'
+		</select>
+		
+		<select id="col6Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '가을 뮤트'
+		</select>
+		
+		<select id="col7Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color=  '가을 스트롱'
+		</select>
+		
+		<select id="col8Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '가을 딥'
+		</select>
+		
+		<select id="col9Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color=  '겨울 브라이트'
+		</select>
+		
+		<select id="col10Select" resultType="String">
+			SELECT sum(p_stock) FROM product
+					WHERE p_color= '겨울 딥'
+		</select>
+		
+</mapper> 

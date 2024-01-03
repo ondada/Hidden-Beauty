@@ -1,0 +1,599 @@
+-----------------------------------------------------------------
+--color 테이블 (퍼스널 컬러)
+-----------------------------------------------------------------
+
+drop sequence colseq;
+create sequence colseq nocache;
+
+drop table color cascade constraints;
+create table color(
+   col_num number,
+   col_name varchar2(30) primary key,
+   col_ttlimg varchar2(30),
+   col_stlimg varchar2(30),
+   col_colimg varchar2(30)
+);
+
+insert into color values(colseq.nextval, '봄 라이트', '1_ttl.jpg', '1_stl.jpg', '1_col.jpg');
+insert into color values(colseq.nextval, '봄 브라이트', '2_ttl.jpg', '2_stl.jpg', '2_col.jpg');
+insert into color values(colseq.nextval, '여름 라이트', '3_ttl.jpg', '3_stl.jpg', '3_col.jpg');
+insert into color values(colseq.nextval, '여름 브라이트', '4_ttl.jpg', '4_stl.jpg', '4_col.jpg');
+insert into color values(colseq.nextval, '여름 뮤트', '5_ttl.jpg', '5_stl.jpg', '5_col.jpg');
+insert into color values(colseq.nextval, '가을 뮤트', '6_ttl.jpg', '6_stl.jpg', '6_col.jpg');
+insert into color values(colseq.nextval, '가을 스트롱', '7_ttl.jpg', '7_stl.jpg', '7_col.jpg');
+insert into color values(colseq.nextval, '가을 딥', '8_ttl.jpg', '8_stl.jpg', '8_col.jpg');
+insert into color values(colseq.nextval, '겨울 브라이트', '9_ttl.jpg', '9_stl.jpg', '9_col.jpg');
+insert into color values(colseq.nextval, '겨울 딥', '10_ttl.jpg', '10_stl.jpg', '10_col.jpg');
+insert into color values(colseq.nextval, '잘 모르겠음', '', '', '');
+
+select * from color order by col_num;
+
+
+-----------------------------------------------------------------
+--cart 테이블 (장바구니)
+-----------------------------------------------------------------
+
+drop sequence cartseq;
+create sequence cartseq nocache; 
+
+drop table cart cascade constraints;
+create table cart(
+   cart_num number primary key,
+   p_num number,
+   cart_order number
+);
+
+select * from cart order by cart_num;
+
+
+-----------------------------------------------------------------
+--temp_cart 테이블 (임시 장바구니)
+-----------------------------------------------------------------
+
+drop sequence temp_cartseq;
+create sequence temp_cartseq nocache; 
+
+drop table temp_cart cascade constraints;
+create table temp_cart(
+   o_num number primary key,
+   p_num number,
+   cart_order number
+);
+
+select * from temp_cart order by o_num;
+
+
+-----------------------------------------------------------------
+--orders 테이블 (주문)
+-----------------------------------------------------------------
+
+drop sequence ordersseq;
+create sequence ordersseq nocache;
+
+drop table orders cascade constraints;
+create table orders(
+   o_num number primary key,
+   p_num number,
+   u_id varchar2(20),
+   u_phone varchar2(20),
+   o_name varchar2(20),
+   o_addr varchar2(20),
+   o_date varchar2(20),
+   cart_order number
+);
+
+select * from orders orders by o_num;
+
+
+-----------------------------------------------------------------
+--celeb 테이블 (퍼스널 컬러 별 연예인 소개)
+-----------------------------------------------------------------
+
+-- CL_NAME : 연예인 이름
+-- CL_IMAGE : 연예인 이미지 파일명
+-- CL_COLOR : 연예인 퍼스널 컬러
+
+drop sequence celeb_seq;
+create sequence celeb_seq;
+
+drop table celeb cascade constraints;
+create table celeb(
+   cl_num number primary key,
+   cl_name varchar2(30) not null,
+   cl_image varchar2(30)not null,
+   cl_color varchar2(50) 
+);
+
+-- 봄 라이트 --
+insert into celeb values(celeb_seq.nextval, '한선화', 'splt1.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '채수빈', 'splt2.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '윤아', 'splt3.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '송혜교', 'splt4.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '한지민', 'splt5.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '아린', 'splt6.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '효정', 'splt7.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '혜리', 'splt8.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '박민영', 'splt9.png', '봄 라이트');
+insert into celeb values(celeb_seq.nextval, '설리', 'splt10.png', '봄 라이트');
+
+-- 봄 브라이트 --
+insert into celeb values(celeb_seq.nextval, '조이', 'spbr1.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '민효린', 'spbr2.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '유정', 'spbr3.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '아이유', 'spbr4.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '제시카', 'spbr5.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '나연', 'spbr6.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '강민경', 'spbr7.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '유빈', 'spbr8.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '류수정', 'spbr9.png', '봄 브라이트');
+insert into celeb values(celeb_seq.nextval, '루다', 'spbr10.png', '봄 브라이트');
+
+-- 여름 라이트 --
+insert into celeb values(celeb_seq.nextval, '손예진', 'smlt1.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '장원영', 'smlt2.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '김연아', 'smlt3.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '설현', 'smlt4.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '손나은', 'smlt5.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '차은우', 'smlt6.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '송강', 'smlt7.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '이영애', 'smlt8.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '서현진', 'smlt9.png', '여름 라이트');
+insert into celeb values(celeb_seq.nextval, '정채연', 'smlt10.png', '여름 라이트');
+
+-- 여름 브라이트 --
+insert into celeb values(celeb_seq.nextval, '아이린', 'smbr1.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '티파니', 'smbr2.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '김소현', 'smbr3.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '태연', 'smbr4.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '설아', 'smbr5.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '희진', 'smbr6.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '다현', 'smbr7.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '노정의', 'smbr8.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '이유비', 'smbr9.png', '여름 브라이트');
+insert into celeb values(celeb_seq.nextval, '문별', 'smbr10.png', '여름 브라이트');
+
+-- 여름 뮤트 --
+insert into celeb values(celeb_seq.nextval, '김고은', 'smmt1.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '전지현', 'smmt2.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '김태리', 'smmt3.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '유재석', 'smmt4.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '육성재', 'smmt5.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '진', 'smmt6.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '윤두준', 'smmt7.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '이광수', 'smmt8.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '사나', 'smmt9.png', '여름 뮤트');
+insert into celeb values(celeb_seq.nextval, '슬기', 'smmt10.png', '여름 뮤트');
+
+-- 가을 뮤트 --
+insert into celeb values(celeb_seq.nextval, '제니', 'atmt1.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '신세경', 'atmt2.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '로제', 'atmt3.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '웬디', 'atmt4.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '박서준', 'atmt5.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '모모', 'atmt6.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '유아', 'atmt7.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '이성경', 'atmt8.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '이나은', 'atmt9.png', '가을 뮤트');
+insert into celeb values(celeb_seq.nextval, '리사', 'atmt10.png', '가을 뮤트');
+
+-- 가을 스트롱 --
+insert into celeb values(celeb_seq.nextval, '김민주', 'atst1.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '예리', 'atst2.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '해찬', 'atst3.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '버논', 'atst4.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '뷔', 'atst5.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '화사', 'atst6.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '한예슬', 'atst7.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '현아', 'atst8.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '김희선', 'atst9.png', '가을 스트롱');
+insert into celeb values(celeb_seq.nextval, '하니', 'atst10.png', '가을 스트롱');
+
+
+-- 가을 딥 --
+insert into celeb values(celeb_seq.nextval, '고윤정', 'atdp1.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '이효리', 'atdp2.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '김유정', 'atdp3.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '전소미', 'atdp4.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '예지', 'atdp5.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '유나', 'atdp6.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '김세정', 'atdp7.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '케이', 'atdp8.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '한고은', 'atdp9.png', '가을 딥');
+insert into celeb values(celeb_seq.nextval, '탕웨이', 'atdp10.png', '가을 딥');
+
+
+
+-- 겨울 브라이트 --
+insert into celeb values(celeb_seq.nextval, '채영', 'wtbr1.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '양요섭', 'wtbr2.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '비니', 'wtbr3.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '선미', 'wtbr4.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '청하', 'wtbr5.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '카리나', 'wtbr6.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '임지연', 'wtbr7.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '김옥빈', 'wtbr8.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '정은채', 'wtbr9.png', '겨울 브라이트');
+insert into celeb values(celeb_seq.nextval, '유리', 'wtbr10.png', '겨울 브라이트');
+
+-- 겨울 딥 --
+insert into celeb values(celeb_seq.nextval, '소연', 'wtdp1.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '이수혁', 'wtdp2.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '옥택연', 'wtdp3.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '김혜수', 'wtdp4.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '문근영', 'wtdp5.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '지석진', 'wtdp6.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '이다희', 'wtdp7.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '디오', 'wtdp8.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '지수', 'wtdp9.png', '겨울 딥');
+insert into celeb values(celeb_seq.nextval, '이하늬', 'wtdp10.png', '겨울 딥');
+
+col cl_num for 999;
+col cl_name for a10;
+col cl_image for a10;
+col cl_color for 999;
+
+select * from celeb order by cl_num;
+
+
+-----------------------------------------------------------------
+--q_board
+-----------------------------------------------------------------
+
+
+drop table q_board;
+create table q_board( 
+   q_num number not null primary key,
+   q_writer varchar2(30) not null,
+   q_email varchar2(30),
+   q_subject varchar2(200) not null,
+   q_password varchar2(20) not null,
+   q_regdate date not null,
+   q_readcount int default 0,
+   q_ref number not null,
+   q_re_step number not null,
+   q_re_level number not null,
+   q_content varchar2(1500) not null,
+   q_ip varchar2(15) not null
+);
+
+drop sequence board_seq;
+create sequence board_seq
+increment by 1
+start with 1
+minvalue 1
+maxvalue 10000
+nocache;
+
+insert into q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'mj01','mj01@gmail.com','배송 문의요','1234','2023-12-06',1,0,0,'좀 지연되는 것 같은데 언제 배송 가능하신가요?','127.0.0.1');
+insert into q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'minji04','mji@naver.com','배송비가 환불할 때도 드나요?','1234','2023-12-05',2,0,0,'답변 부탁드립니다.','127.0.0.1');
+insert into q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'haerin','haerin@gmail.com','입고 예정 문의요','1234','2023-12-05',3,0,0,'정확한 상품명은 모르는데 입고 예정이 있나요?','127.0.0.1');
+insert into q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'hyein','hyein@gmail.com','신상 화장품 언제쯤','1234','2023-12-04',4,0,0,'신상 화장품 언제쯤 들어오나요','127.0.0.1');
+insert into q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'jihye','jihye@gmail.com','묶음 배송 해주세요','1234','2023-12-06',5,0,0,'하나하나 뜯기 귀찮은데 묶음 배송 해주실 수 있나요','127.0.0.1');
+
+insert into 
+q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'risa','risa@gmail.com','이벤트 질문 있습니다','1234','2023-12-06',6,0,0,'이벤트 당첨은 언제 알려주시나요?','127.0.0.1');
+
+insert into 
+q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'jenny','jenny@gmail.com','배송비는 얼마인가요','1234','2023-11-23',7,0,0,'무료 배송은 얼마부터 가능한지...','127.0.0.1');
+
+insert into 
+q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'rose','rose@gmail.com','반품할 때 비용이 드나요?','1234','2023-11-23',8,0,0,'정확한 반품 비용 알려주세여','127.0.0.1');
+
+insert into 
+q_board(q_num,q_writer,q_email,q_subject,q_password,q_regdate,q_ref,q_re_step,q_re_level,q_content,q_ip)values(board_seq.nextval,'jisu','jisu@gmail.com','반송 주소는 회사로 해야하나요','1234','2023-12-01',9,0,0,'반송 주소 알려주세요','127.0.0.1');
+
+-- insert 내용은 c_board 레코드 복붙한 것 나중에 추가예정
+
+
+commit;
+
+
+-----------------------------------------------------------------
+--c_board 테이블 (의견 게시판)
+-----------------------------------------------------------------
+
+drop table c_board;
+create table c_board( 
+   c_num number not null primary key,
+   c_writer varchar2(30) not null,
+   c_email varchar2(30),
+   c_subject varchar2(200) not null,
+   c_password varchar2(20) not null,
+   c_regdate date not null,
+   c_readcount int default 0,
+   c_ref number not null,
+   c_re_step number not null,
+   c_re_level number not null,
+   c_content varchar2(1500) not null,
+   c_ip varchar2(15) not null
+);
+
+drop sequence board_seq;
+create sequence board_seq
+increment by 1
+start with 1
+minvalue 1
+maxvalue 10000
+nocache;
+
+insert into c_board(c_num,c_writer,c_email,c_subject,c_password,c_regdate,c_ref,c_re_step,c_re_level,c_content,c_ip)values(board_seq.nextval,'mj01','mj01@gmail.com','겨쿨 나왔는데 파데 뭐 쓰시나요?','1234','2023-12-06',12,0,0,'이건 지성/건성 문제인 것 같기도 하고... 제가 복합성이라 그런지 뭘 써도 다크닝이 심해서 고민되네요 ㅠ','127.0.0.1');
+insert into c_board(c_num,c_writer,c_email,c_subject,c_password,c_regdate,c_ref,c_re_step,c_re_level,c_content,c_ip)values(board_seq.nextval,'minji04','mji@naver.com','봄웜인줄 알았는데 갈웜 판정...','1234','2023-12-05',10,0,0,'지금까지 살아온 인생이 부정당한 느낌!!!!!','127.0.0.1');
+insert into c_board(c_num,c_writer,c_email,c_subject,c_password,c_regdate,c_ref,c_re_step,c_re_level,c_content,c_ip)values(board_seq.nextval,'jiwon','jiwon@naver.com','지성 피부는 뭘 해도 무너지네','1234','2023-11-23',3,0,0,'컬러 진단 받고 추천 받은 화장품은 다 건성용이길래 지성 피부도 쓸 수 있는 화장품 추천해주라...','127.0.0.1');
+insert into c_board(c_num,c_writer,c_email,c_subject,c_password,c_regdate,c_ref,c_re_step,c_re_level,c_content,c_ip)values(board_seq.nextval,'hs07','hs07@gmail.com','여름뮤트들아','1234','2023-11-23',2,0,0,'다들 추천받은 거로 화장품 맞춰서 써?? 나만 원래 쓰던거 고집하는 거 아니지... ㅋㅋㅋ 화장품 값이 너무 비싸다 요즘...','127.0.0.1');
+insert into c_board(c_num,c_writer,c_email,c_subject,c_password,c_regdate,c_ref,c_re_step,c_re_level,c_content,c_ip)values(board_seq.nextval,'miyeon','my@naver.com','봄라이트 나왔는데 부정중','1234','2023-11-23',1,0,0,'가을뮤트가 되고 싶은 걸요','127.0.0.1');
+insert into c_board(c_num,c_writer,c_email,c_subject,c_password,c_regdate,c_ref,c_re_step,c_re_level,c_content,c_ip)values(board_seq.nextval,'foreveryoung','wonyoung@naver.com','임지연은 진짜 확신의 겨쿨임','1234','2023-12-01',5,0,0,'핫핑크 저렇게 잘 어울리는 사람 처음 보잖아','127.0.0.1');
+commit;
+
+
+
+-----------------------------------------------------------------
+--company 테이블 (퍼스널 컬러 진단업체)
+-----------------------------------------------------------------
+
+drop sequence cmpseq;
+create sequence cmpseq 
+start with 1 
+increment by 1 
+nocache ;
+
+create table company( 
+   cmp_num number primary key,
+   cmp_name varchar2(50),
+   cmp_addr varchar2(50),
+   cmp_price number,
+   cmp_station varchar2(20),
+   cmp_x varchar2(20),
+   cmp_y varchar2(20)
+);
+
+insert into company values(   cmpseq.nextval,   '아란 퍼스널컬러 진단',   '서울 마포구 동교로18길 37 2층',   290000,   '홍대입구역, 합정역',   '126.9179178',   '37.5537583'   );
+insert into company values(   cmpseq.nextval,   '필린 퍼스널컬러진단 이미지컨설팅',   '서울 마포구 월드컵로10길 17 2층',   140000,   '망원역, 합정역',   '126.9126668',   '37.5548526'   );
+insert into company values(   cmpseq.nextval,   '컬러가산다 퍼스널컬러진단 홍대동교센터',   '서울 마포구 동교로 192-1 3층',   100000,   '홍대입구역',   '126.9227512',   '37.5572882'   );
+insert into company values(   cmpseq.nextval,   '담쁨퍼스널컬러진단',   '서울 마포구 와우산로29길 47 3층',   160000,   '홍대입구역',   '126.9273241',   '37.5556357'   );
+insert into company values(   cmpseq.nextval,   '메이크온전히 퍼스널컬러 진단',   '서울 마포구 와우산로35길 19 4층 메이크온전히',   200000,   '홍대입구역',   '126.9293858',   '37.5558635'   );
+insert into company values(   cmpseq.nextval,   '오띠모 퍼스널컬러 진단',   '서울 성동구 왕십리로16가길 10-30 6층',   140000,   '뚝섬역',   '127.0453339',   '37.5506313'   );
+insert into company values(   cmpseq.nextval,   'CCL컬러이미지융합연구소 퍼스널컬러 진단',   '서울 성동구 성수이로 66 서울숲 드림타워 711호',   150000,   '성수역',   '127.0561825',   '37.5405547'   );
+insert into company values(   cmpseq.nextval,   '한국패션심리연구원 퍼스널컬러진단',   '서울 강남구 선릉로 840 4층 한국패션심리연구원',   280000,   '압구정로데오역',   '127.0406647',   '37.5268112'   );
+insert into company values(   cmpseq.nextval,   '컬러가산다 퍼스널컬러진단 건대센터',   '서울 광진구 아차산로34길 36 3층',   100000,   '건대입구역 ',   '127.0689244',   '37.5386108'   );
+insert into company values(   cmpseq.nextval,   '조이컬러공방 퍼스널컬러진단',   '서울 은평구 통일로 780 미성아파트상가 1층 조이컬러공방',   180000,   '불광역',   '126.9283096',   '37.6149286'   );
+insert into company values(   cmpseq.nextval,   '컬러라이즈 퍼스널컬러 진단',   '서울 서초구 사임당로 173 서전빌딩 4층,9층',   140000,   '강남역 ',   '127.0285544',   '37.4927943'   );
+insert into company values(   cmpseq.nextval,   '컬러공방 퍼스널컬러진단',   '서울 서초구 사평대로57길 39-1 2층',   158000,   '신논현역 ',   '127.0226479',   '37.5059293'   );
+insert into company values(   cmpseq.nextval,   '컬러모아 퍼스널컬러진단',   '서울 서초구 강남대로83길 36 학산빌딩 2층 202호',   156000,   '신논현역 ',   '127.0216668',   '37.5057215'   );
+insert into company values(   cmpseq.nextval,   '픽컬러브랜딩센터 퍼스널컬러 진단 컬러리스트',   '서울 영등포구 문래북로 116',   169000,   '문래역',   '126.8980628',   '37.5194432'   );
+insert into company values(   cmpseq.nextval,   '컬러시그널 퍼스널컬러진단 실버점',   '서울 강남구 역삼로20길 12 성우빌딩 4층 컬러시그널',   138000,   '역삼역 ',   '127.0376275',   '37.4944506'   );
+insert into company values(   cmpseq.nextval,   '프롬컬러 퍼스널컬러 진단',   '서울 영등포구 문래로 180 센트럴 푸르지오시티 415호',   140000,   '영등포역,문래역',   '126.9019541',   '37.5179756'   );
+insert into company values(   cmpseq.nextval,   '더즈 퍼스널컬러 진단',   '서울 마포구 망원로 21 2층',   158000,   '망원역',   '126.899403',   '37.5563623'   );
+insert into company values(   cmpseq.nextval,   '유어컬러즈:컬러곰 퍼스널컬러진단',   '서울 강남구 학동로55길 17 4층',   140000,   '강남구청역',   '127.0415693',   '37.518603'   );
+insert into company values(   cmpseq.nextval,   '컬러앤센트 퍼스널컬러 진단',   '서울 서초구 방배천로16길 11-9 1층',   189000,   '총신대입구',   '126.9835279',   '37.4825026'   );
+insert into company values(   cmpseq.nextval,   '컬러홀릭 골격핏 퍼스널컬러진단',   '서울 강남구 테헤란로 310 13층 1301호',   152000,   '선릉역',   '127.0447848',   '37.5028251'   );
+insert into company values(   cmpseq.nextval,   '이음컬러 퍼스널컬러 진단',   '서울 구로구 경인로 661 신도림1차푸르지오 103동',   160000,   '신도림역',   '126.8877437',   '37.5094204'   );
+insert into company values(   cmpseq.nextval,   '디자인미 퍼스널컬러진단',   '서울 강남구 테헤란로 327 413호',   170000,   '선릉역 ',   '127.0470626',   '37.5045798'   );
+insert into company values(   cmpseq.nextval,   '푸른달컬러 퍼스널컬러 진단',   '서울 영등포구 도림천로19길 11 4층 411호',   158000,   '구로디지털단지역',   '126.9001891',   '37.4866104'   );
+insert into company values(   cmpseq.nextval,   '이안컬러랩 퍼스널컬러 진단',   '서울 서초구 사임당로 178 지하 1층 복도 끝 이안 컬러랩',   138000,   '강남역',   '127.0291018',   '37.4921331'   );
+insert into company values(   cmpseq.nextval,   '컬러블랑 퍼스널컬러진단',   '서울 송파구 올림픽로12길 62 2층 202호',   200000,   '삼전역 ',   '127.08292',   '37.5062097'   );
+insert into company values(   cmpseq.nextval,   '퍼스널리브 퍼스널컬러 진단',   '서울 관악구 신원로 35 8층 15호',   110000,   '신림역',   '126.9289185',   '37.4822382'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러 진단 오운이미지랩',   '서울 강서구 공항대로 186 로뎀타워 706호',   120000,   '마곡역',   '126.8280371',   '37.5591043'   );
+insert into company values(   cmpseq.nextval,   '탑 컬러 퍼스널컬러 진단',   '서울 강서구 마곡중앙로 161-8 A동 10층 1011호',   120000,   '마곡나루역',   '126.8270966',   '37.5689359'   );
+insert into company values(   cmpseq.nextval,   '위올컬러 퍼스널컬러진단',   '서울 강동구 상일로12길 54 J파크 202호',   150000,   '강일역 ',   '127.174276',   '37.5548669'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러, 골격진단 잇츠마이컬러',   '서울 강남구 강남대로128길 61 현성512빌딩 401호',   180000,   '학동역 ',   '127.0263162',   '37.512098'   );
+insert into company values(   cmpseq.nextval,   '오롯이컬러 퍼스널컬러 골격진단',   '서울 관악구 남부순환로 1911 2층',   180000,   '낙성대역',   '126.961871',   '37.4779955'   );
+insert into company values(   cmpseq.nextval,   '비비드강 퍼스널컬러',   '서울 마포구 양화로 193',   175000,   '홍대입구역 ',   '126.9258946',   '37.5587739'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러 색다르다',   '서울 마포구 양화로 175 마젤란21',   160000,   '홍대입구역 ',   '126.924381',   '37.5577543'   );
+insert into company values(   cmpseq.nextval,   '느로아 퍼스널컬러',   '서울 마포구 동교로 248-2 3층 302호',   150000,   '홍대입구역',   '126.9245307',   '37.5621234'   );
+insert into company values(   cmpseq.nextval,   '컬러쏘싸이어티 퍼스널컬러',   '서울 마포구 동교로 215 컬러쏘싸이어티',   200000,   '홍대입구역',   '126.9234822',   '37.5592515'   );
+insert into company values(   cmpseq.nextval,   '온도팔레트 퍼스널컬러',   '서울 마포구 양화로 157 파라다이스텔 10층 1007호',   140000,   '홍대입구역',   '126.9229417',   '37.5566855'   );
+insert into company values(   cmpseq.nextval,   '컬러오브데이 퍼스널컬러진단',   '서울 성동구 서울숲9길 5 4층',   138000,   '뚝섬역 ',   '127.0435731',   '37.5483984'   );
+insert into company values(   cmpseq.nextval,   '컬러바이유 퍼스널컬러',   '서울 광진구 광나루로 386 건대 하이뷰 오피스텔 709호',   158000,   '어린이대공원역',   '127.0723072',   '37.547397'   );
+insert into company values(   cmpseq.nextval,   '청담퍼스널컬러세븐에이알',   '서울 강남구 영동대로 644 7F',   136000,   '청담역',   '127.0580297',   '37.5193096'   );
+insert into company values(   cmpseq.nextval,   '컬러츄',   '서울 성동구 연무장5가길 25 516호',   110000,   '성수역',   '127.0556438',   '37.5435802'   );
+insert into company values(   cmpseq.nextval,   '라새라색채연구소',   '서울 송파구 백제고분로 501 청호오피스텔 405호',   180000,   '한성백제역',   '127.1146774',   '37.5152322'   );
+insert into company values(   cmpseq.nextval,   '레츄',   '서울 중랑구 면목로43길 19 201',   180000,   '사가정역',   '127.0868158',   '37.5813337'   );
+insert into company values(   cmpseq.nextval,   '제이앤이미지퍼스널이미지브랜딩연구소',   '서울 강남구 삼성로 763 금탁프라자 3층, 301',   240000,   '청담역',   '127.0476713',   '37.522921'   );
+insert into company values(   cmpseq.nextval,   '누벨 이마주',   '서울 성동구 아차산로 126 성수동더리브 세종타워 303호',   280000,   '성수역',   '127.0582301',   '37.5434075'   );
+insert into company values(   cmpseq.nextval,   '몽끄컬러랩 본점',   '서울 강남구 압구정로28길 22-11 2층',   270000,   '압구정역',   '127.026623',   '37.5249935'   );
+insert into company values(   cmpseq.nextval,   '무드컬렉트 강남점',   '서울 강남구 테헤란로6길 7 4층',   260000,   '강남역',   '127.030679',   '37.4981759'   );
+insert into company values(   cmpseq.nextval,   '마이쇼퍼 압구정점',   '서울 강남구 언주로153길 10-6 2층',   260000,   '압구정역',   '127.0323979',   '37.5231212'   );
+insert into company values(   cmpseq.nextval,   '컬러에이치',   '서울 강남구 학동로1길 19 5층',   200000,   '논현역 ',   '127.021593',   '37.5126835'   );
+insert into company values(   cmpseq.nextval,   '컬러즈아트',   '서울 강남구 강남대로156길 20 정원빌딩 2층',   170000,   '신사역 ',   '127.0208133',   '37.5182433'   );
+insert into company values(   cmpseq.nextval,   '리씨엘 컬러 스튜디오',   '서울 강남구 삼성로57길 28 지석빌딩 6층 리씨엘',   170000,   '한티역',   '127.0587286',   '37.4976861'   );
+insert into company values(   cmpseq.nextval,   '무드플러스',   '서울 강남구 강남대로156길 18 범원빌딩 5층 502호',   170000,   '신사역',   '127.0206775',   '37.5181862'   );
+insert into company values(   cmpseq.nextval,   '다채로윤 퍼스널컬러',   '서울 송파구 백제고분로39길 29 301호',   130000,   '석촌역',   '127.1035534',   '37.5067333'   );
+insert into company values(   cmpseq.nextval,   '오콜로르 신사점',   '서울 강남구 강남대로156길 20 정원빌딩 2층',   180000,   '신사역',   '127.0208133',   '37.5182433'   );
+insert into company values(   cmpseq.nextval,   '삼월부티크',   '서울 강남구 압구정로4길 20 끄레아빌 203호',   180000,   '신사역',   '127.0203987',   '37.5213824'   );
+insert into company values(   cmpseq.nextval,   '예랑 뷰티 아카데미',   '서울 강남구 학동로38길 42 2층',   150000,   '학동역',   '127.0345859',   '37.5120685'   );
+insert into company values(   cmpseq.nextval,   '챠밍아틀리에 퍼스널컬러 메이크업',   '서울 강북구 도봉로 328 15층 1516호',   170000,   '수유역',   '127.0252072',   '37.6370653'   );
+insert into company values(   cmpseq.nextval,   '아니마레',   '서울 성북구 화랑로11길 17-9 1층 101호',   280000,   '월곡역',   '127.0410667',   '37.6031718'   );
+insert into company values(   cmpseq.nextval,   '딸로퍼스널컬러컨설팅',   '서울 서초구 방배천로2길 7',   160000,   '사당역',   '126.9834302',   '37.4772861'   );
+insert into company values(   cmpseq.nextval,   '컬러아르떼 퍼스널컬러',   '서울 종로구 대학로11길 27 4층',   200000,   '혜화역',   '127.0001313',   '37.5820484'   );
+insert into company values(   cmpseq.nextval,   '유컬러 퍼스널컬러',   '서울 강서구 곰달래로20길 18 풍원팰리스 B102호',   190000,   '까치산역',   '126.8426811',   '37.5293934'   );
+insert into company values(   cmpseq.nextval,   '컬러퀸 퍼스널컬러 진단',   '서울 성동구 성수일로 111 1214',   300000,   '뚝섬역',   '127.0515434',   '37.5502733'   );
+insert into company values(   cmpseq.nextval,   '컬러마인',   '서울 송파구 백제고분로7길 42-37',   130000,   '잠실새내역',   '127.0841686',   '37.5091894'   );
+insert into company values(   cmpseq.nextval,   '디어유어컬러',   '서울 송파구 충민로 66 7층 T-7014호',   120000,   '장지역',   '127.1249964',   '37.4776483'   );
+insert into company values(   cmpseq.nextval,   '룩스컬러',   '서울 송파구 석촌호수로 268 208호',   130000,   '석촌역',   '127.1057107',   '37.5097096'   );
+insert into company values(   cmpseq.nextval,   '컬러무이 퍼스널컬러',   '서울 동작구 동작대로9가길 21 1층 102호',   158000,   '사당역',   '126.9787727',   '37.4794938'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러 온',   '서울 관악구 남부순환로218길 27 302(봉천동, 관전 G타워)',   170000,   '서울대입구역',   '126.9505017',   '37.4800384'   );
+insert into company values(   cmpseq.nextval,   '컬러 마지끄',   '서울 관악구 보라매로2길 28 1층 101호',   140000,   '당곡역 ',   '126.9294689',   '37.489718'   );
+insert into company values(   cmpseq.nextval,   '랑데부컬러',   '서울 관악구 봉천로14길 12 206호',   168000,   '당곡역',   '126.9297726',   '37.4874903'   );
+insert into company values(   cmpseq.nextval,   '컬러데이즈',   '서울 관악구 봉천로45길 8 5층',   180000,   '서울대입구역',   '126.9494539',   '37.48305'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러나다움',   '서울 강서구 마곡서로 158 센트럴타워2차 1109호',   109000,   '마곡나루역',   '126.8254305',   '37.5681063'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러 휴어',   '서울 강서구 공항대로 213 보타닉파크타워2 606호',   115000,   '마곡역',   '126.8313869',   '37.5596779'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러 당신의 팔레트',   '서울 강서구 공항대로 200 706호(마곡동, 마곡지웰타워)',   130000,   '마곡역',   '126.8295014',   '37.5589733'   );
+insert into company values(   cmpseq.nextval,   '만나다컬러',   '서울 강서구 마곡서로 152 B동 6층 617호',   110000,   '마곡나루역',   '126.8256375',   '37.5676575'   );
+insert into company values(   cmpseq.nextval,   '컬러텔링 퍼스널컬러',   '서울 양천구 신정중앙로 68 4층 마이비지니스파트너',   179000,   '신정역',   '126.8593407',   '37.5266265'   );
+insert into company values(   cmpseq.nextval,   '퍼스널컬러 꼴로레',   '서울 영등포구 선유로49길 20-3 그린빌딩 302호',   100000,   '선유도역',   '126.8954354',   '37.5367193'   );
+insert into company values(   cmpseq.nextval,   '홀리몰리 퍼스널컬러',   '서울 마포구 백범로 8 2층 ILTER',   99000,   '신촌역',   '126.936773',   '37.554087'   );
+insert into company values(   cmpseq.nextval,   '세컨뉴 퍼스널컬러',   '서울 마포구 어울마당로 96 5층 504호',   110000,   '홍대입구역, 합정역',   '126.9222777',   '37.5535274'   );
+insert into company values(   cmpseq.nextval,   '오콜로르 여의도점',   '서울 영등포구 국제금융로6길 33 맨하탄빌딩 1106호',   180000,   '여의도역',   '126.9269161',   '37.520782'   );
+insert into company values(   cmpseq.nextval,   '더즈 퍼스널컬러 진단',   '서울 마포구 망원로 21 2층',   158000,   '망원역',   '126.899403',   '37.5563623'   );
+insert into company values(   cmpseq.nextval,   '블레스미 여의도점',   '서울 영등포구 국제금융로6길 30 백상빌딩 916-917호',   200000,   '여의도역 ',   '126.9265494',   '37.5217758'   );
+insert into company values(   cmpseq.nextval,   '라엘나',   '서울 영등포구 국제금융로6길 33',   119800,   '여의도역',   '126.9269161',   '37.520782'   );
+insert into company values(   cmpseq.nextval,   '프목 퍼스널컬러',   '서울 마포구 망원로3길 38 4층 fmoc',   180000,   '마포구청역',   '126.9009076',   '37.5583183'   );
+insert into company values(   cmpseq.nextval,   '유트룰리 퍼스널컬러',   '서울 마포구 어울마당로 136-11 2층 g-studio',   180000,   '홍대입구역',   '126.925538',   '37.5558634'   );
+insert into company values(   cmpseq.nextval,   '멜팅피 퍼퓸 앤 퍼스널컬러',   '서울 마포구 월드컵로10길 17 2층',   240000,   '망원역',   '126.9126668',   '37.5548526'   );
+insert into company values(   cmpseq.nextval,   '컬러오브유',   '서울 마포구 동교로 209 용평빌딩 3층 컬러오브유',   150000,   '홍대입구역',   '126.9233044',   '37.5587131'   );
+insert into company values(   cmpseq.nextval,   '컬러윙스',   '서울 마포구 마포대로10길 12 트레퍼빌딩 런치스페이스 4층',   180000,   '공덕역',   '126.9542159',   '37.5470198'   );
+insert into company values(   cmpseq.nextval,   '리얼컬러',   '서울 마포구 양화로 59 화승리버스텔 606호',   140000,   '합정역',   '126.9148716',   '37.5506416'   );
+insert into company values(   cmpseq.nextval,   '세임컬러',   '서울 서대문구 이화여대길 52-11 1층 101호',   130000,   '신촌역, 이대역',   '126.9451151',   '37.5593392'   );
+insert into company values(   cmpseq.nextval,   '엘리이미지연구소',   '서울 마포구 양화로 56',   140000,   '합정역',   '126.9148119',   '37.5495474'   );
+insert into company values(   cmpseq.nextval,   '컬러튜드',   '서울 마포구 신촌로 246-2 3층',   170000,   '아현역',   '126.9531414',   '37.5570282'   );
+insert into company values(   cmpseq.nextval,   '위드컬러랑',   '서울 마포구 백범로 8 339호',   110000,   '신촌역',   '126.936773',   '37.554087'   );
+insert into company values(   cmpseq.nextval,   '뷰티팔레트',   '서울 마포구 와우산로19길 6-5 이재빌딩 4층',   140000,   '상수역',   '126.9228152',   '37.5514953'   );
+insert into company values(   cmpseq.nextval,   '브리앙뜨 컬러',   '서울 은평구 은평로 91 Cj드림시티 B동 1008호',   159000,   '응암역',   '126.9178219',   '37.5997076'   );
+insert into company values(   cmpseq.nextval,   '도하뷰티',   '서울 서초구 사임당로 178 지하1층 도하뷰티',   138000,   '강남역',   '127.0291018',   '37.4921331'   );
+insert into company values(   cmpseq.nextval,   '온리',   '서울 용산구 한강대로10길 13 4층',   170000,   '신용산역',   '126.9642401',   '37.5239966'   );
+insert into company values(   cmpseq.nextval,   '솔이미지',   '서울 강남구 광평로56길 8-13',   176000,   '수서역',   '127.103178',   '37.4867729'   );
+insert into company values(   cmpseq.nextval,   '더이미지플러스',   '서울 서초구 강남대로 359 도씨에빛2 509호',   165000,   '강남역',   '127.0285982',   '37.4947834'   );
+insert into company values(   cmpseq.nextval,   '이미지유어즈',   '서울 강남구 도산대로53길 32 3F',   270000,   '압구정로데오역',   '127.0389638',   '37.5252804'   );
+insert into company values(   cmpseq.nextval,   '봄날',   '서울 중구 퇴계로20길 15 2층',   150000,   '명동역',   '126.9858911',   '37.5594979'   );
+insert into company values(   cmpseq.nextval,   '칼라코드 컬러연구소',   '서울 종로구 북촌로5나길 7-4',   200000,   '안국역',   '126.9820289',   '37.581264'   );
+insert into company values(   cmpseq.nextval,   'PIB연구소',   '서울 서초구 서초대로51길 29 7층',   180000,   '교대역',   '127.0136798',   '37.4963789'   );
+insert into company values(   cmpseq.nextval,   '이음에듀커뮤니케이션',   '서울 광진구 군자로 43 아스하임오피스텔 809호',   140000,   '어린이대공원역',   '127.0700222',   '37.547115'   );
+insert into company values(   cmpseq.nextval,   '예슬 이미지',   '서울 성동구 왕십리로 309',   132000,   '왕십리역',   '127.03461',   '37.5611981'   );
+
+-----------------------------------------------------------------
+--users
+-----------------------------------------------------------------
+
+drop table users;
+create table users(
+ u_id varchar2(10) primary key,
+ u_name varchar2(30),
+ u_password varchar2(15),
+ u_phone varchar2(11), 
+ u_address varchar2(50), 
+ u_point int,
+ u_pay varchar2(20),
+ u_color varchar2(20) references color(col_name) on delete set null
+);
+
+insert into users
+values('admin', '관리자', '1234', '', '', '', '', '잘 모르겠음');
+
+commit;
+
+
+-----------------------------------------------------------------
+--product
+-----------------------------------------------------------------
+
+drop sequence pro_seq;
+create sequence pro_seq;
+
+drop table product;
+create table product(
+ p_num number primary key,
+ p_brand varchar2(20),
+ p_name varchar2(100),
+ p_ttlimg varchar2(20),
+ p_dtlimg varchar2(20),
+ p_color references color(col_name) on delete set null,
+ p_price number,
+ p_point number,
+ p_stock number,
+ p_salevolume number,
+ p_contents varchar2(200)
+);
+
+insert into product values(	pro_seq.nextval,	'롬앤',	'쥬시 래스팅 틴트 #오리지널 05 피치미',	'1peach_ttl.jpg',	'1peach_dtl.jpg',	'봄 라이트',	8400,	840,	100,	0,	'여리여리한 복숭아를 내 입술에 저장, 설레는 복숭아 컬러'	);
+insert into product values(	pro_seq.nextval,	'포렌코즈',	'타투 글래스 틴트 03 아잘레아',	'forencos_ttl.jpg',	'forencos_dtl.jpg',	'봄 라이트',	10900,	1090,	100,	0,	'말린 장미에 코랄 핑크빛을 톡! 청순한 데일리 로즈 코랄 강력 추천'	);
+insert into product values(	pro_seq.nextval,	'투쿨포스쿨',	'플레르 틴트 02 휘슬링',	'1whistling_ttl.jpg',	'1whistling_dtl.jpg',	'봄 라이트',	10800,	1080,	100,	0,	'코랄에 탄산 넣은 듯 화사함이 톡톡 튀는 코랄빛 자몽에이드'	);
+insert into product values(	pro_seq.nextval,	'베네피트',	'차차틴트',	'1chacha_ttl.jpg',	'1chacha_dtl.jpg',	'봄 라이트',	27900,	2790,	100,	0,	'코랄의 정석, 망고 코랄 틴트'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'맑게 물든 선샤인 치크 18 수줍게인사해',	'peripera_ttl.jpg',	'peripera_dtl.jpg',	'봄 라이트',	6400,	640,	100,	0,	'안녕? 나 봄이야. 수줍게 비치는 햇살을 담아낸 뽀오얀 살몬 코랄'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크 팝 멜론 팝',	'clinique_ttl.jpg',	'1melon_dtl.jpg',	'봄 라이트',	35000,	3500,	100,	0,	'-'	);
+insert into product values(	pro_seq.nextval,	'어퓨',	'과즙팡 워터 블러셔 CR01 인간계복숭아',	'1ingan_ttl.jpg',	'1ingan_dtl.jpg',	'봄 라이트',	5600,	560,	100,	0,	'소프트 오렌지'	);
+insert into product values(	pro_seq.nextval,	'에뛰드하우스',	'룩 앳 마이 아이즈 카페 PK001 피치라떼',	'cafe_ttl.jpg',	'cafe_dtl.jpg',	'봄 라이트',	4000,	400,	100,	0,	'미세한 실버 펄감의 톤 보정용 화이트 코랄 핑크 컬러'	);
+insert into product values(	pro_seq.nextval,	'에스쁘아',	'리얼 아이 팔레트 5호 애프리콧 미',	'espoir2_ttl.jpg',	'1apricot_dtl.jpg',	'봄 라이트',	32000,	3200,	100,	0,	'뽀얗게 물드는 살구결 생기'	);
+insert into product values(	pro_seq.nextval,	'홀리카홀리카',	'마이페이브 바이브 아이 팔레트 #머추어피치',	'1mature_ttl.jpg',	'1mature_dtl.jpg',	'봄 라이트',	32000,	3200,	100,	0,	'다채롭게 무르익은 12가지의 각양각색의 프루츠 컬러 조합'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'잉크 더 벨벳 #7 비주얼갑',	'peripera3_ttl.jpg',	'peripera3_dtl.jpg',	'봄 브라이트',	8000,	800,	100,	0,	'레드 중의 비주얼 센터 레드! 오렌지 한 방울 떨어트린 맑은 레드'	);
+insert into product values(	pro_seq.nextval,	'삐아',	'라스트 벨벳 틴트 V02 생기갑',	'bbia_ttl.jpg',	'2extra_dtl.jpg',	'봄 브라이트',	11000,	1100,	100,	0,	'비비드한 오렌지 레드'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'제로 매트 립스틱 #오리지널 12 썸띵',	'2something_ttl.jpg',	'2something_dtl.jpg',	'봄 브라이트',	9600,	960,	100,	0,	'퓨어한 코랄과 레드가 만난 통통 튀는 코랄레드'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크 팝 피치 팝',	'clinique_ttl.jpg',	'2peach_dtl.jpg',	'봄 브라이트',	35000,	3500,	100,	0,	'-'	);
+insert into product values(	pro_seq.nextval,	'에뛰드하우스',	'룩 앳 마이 아이즈 쥬얼 OR207 상큼하다귤',	'2or_ttl.jpg',	'2or_dtl.jpg',	'봄 브라이트',	5500,	550,	100,	0,	'실버,골드,오렌지 펄들이 어울러져 상큼하게 빛나는 오렌지 글리터'	);
+insert into product values(	pro_seq.nextval,	'나스',	'블러쉬 오르가즘',	'2orgasm_ttl.jpg',	'2orgasm_dtl.jpg',	'봄 브라이트',	40500,	4050,	100,	0,	'빛나는 복숭아톤 핑크'	);
+insert into product values(	pro_seq.nextval,	'투쿨포스쿨',	'프로타주 펜슬 08 센티드 부케',	'2scented_ttl.jpg',	'2scented_dtl.jpg',	'봄 브라이트',	9900,	990,	100,	0,	'여린 살구빛 감도는 웜 코랄'	);
+insert into product values(	pro_seq.nextval,	'페리페라 ',	'올 테이크 무드 팔레트 #08 당근, 근데 이제 햇살을 곁들인',	'peripera2_ttl.jpg',	'peripera2_dtl.jpg',	'봄 브라이트',	16800,	1680,	100,	0,	'단 하나로 끝내는 올테이크 무드 팔레트'	);
+insert into product values(	pro_seq.nextval,	'데이지크',	'섀도우 팔레트 02 로즈 페탈',	'2rose_ttl.jpg',	'2rose_dtl.jpg',	'봄 브라이트',	27200,	2720,	100,	0,	'화사하게 피어나는 장미꽃 컬러를 담은 데이지크의 감성 아이 팔레트'	);
+insert into product values(	pro_seq.nextval,	'홀리카홀리카',	'아이 스팽 글리터 6호 쉘 파츠',	'2shell_ttl.jpg',	'2shell_dtl.jpg',	'봄 브라이트',	7900,	790,	100,	0,	'살구빔 베이스에 핑크 플레이크,오렌지,그린 펄 및 아쿠아,오렌지 스팽글 글리터가 신비롭게 반짝이는 컬러'	);
+insert into product values(	pro_seq.nextval,	'에뛰드하우스',	'에어 무스 아이즈 PK001 샤랄라 흩날리나 봄',	'3pk_ttl.jpg',	'3pk_dtl.jpg',	'여름 라이트',	6500,	650,	100,	0,	'촘촘하고 다채로운 펄들이 차르르 빛나 눈 두덩이와 눈 앞머리에 쓰기 좋은 오팔 글리터'	);
+insert into product values(	pro_seq.nextval,	'데이지크',	'쥬시 듀이 틴트 03 핑크 구아바',	'3guava_ttl.jpg',	'3guava_dtl.jpg',	'여름 라이트',	11900,	1190,	100,	0,	'피부에 동동 뜨지 않는 맑고 러블리한 느낌의 핑크 컬러'	);
+insert into product values(	pro_seq.nextval,	'퓌',	'미니 아이팔레트 글래스 02 여름',	'3summer_ttl.jpg',	'3summer_dtl.jpg',	'여름 라이트',	12000,	1200,	100,	0,	'손 안에 감기는 미니 사이즈로 손쉽게 표현하는 나만의 글래스 무드'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'듀이풀 워터 틴트 #밀크그로서리 10 머머핑크',	'3murmur_ttl.jpg',	'3murmur_dtl.jpg',	'여름 라이트',	9900,	990,	100,	0,	'진하게 우려낸 딸기우유 같은 쿨 핑크'	);
+insert into product values(	pro_seq.nextval,	'홀리카홀리카',	'피스매칭 블러셔 클린시리즈 클린핑크',	'3clean_ttl.jpg',	'3clean_dtl.jpg',	'여름 라이트',	6500,	650,	100,	0,	'흰끼 낭낭 청순한 핑크'	);
+insert into product values(	pro_seq.nextval,	'라카',	'프루티 글램 틴트 105 콜드',	'3cold_ttl.jpg',	'3cold_dtl.jpg',	'여름 라이트',	15000,	1500,	100,	0,	'물기 어린 과일처럼 투명감 있게 반짝이는 컬러들'	);
+insert into product values(	pro_seq.nextval,	'나스',	'블러쉬 스릴',	'3thrill_ttl.jpg',	'3thrill_dtl.jpg',	'여름 라이트',	40500,	4050,	100,	0,	'라이트 쿨 핑크'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크팝 발레리나팝',	'clinique_ttl.jpg',	'3ballet_dtl.jpg',	'여름 라이트',	35000,	3500,	100,	0,	'-'	);
+insert into product values(	pro_seq.nextval,	'포렌코즈',	'타투 글래스 틴트 06 프랑',	'forencos_ttl.jpg',	'forencos_dtl.jpg',	'여름 라이트',	10900,	1090,	100,	0,	'꽃보다 더 꽃 같은 데일리 핑크 부케 착 붙는 자연스러운 데일리 여린 핑크!'	);
+insert into product values(	pro_seq.nextval,	'릴리바이레드',	'무드키보드 04 #쿨멤버쉽',	'3cool_ttl.jpg',	'3cool_dtl.jpg',	'여름 라이트',	21900,	2190,	100,	0,	'맑은 푸른 기 한 방울을 더해 뜨지 않는 라벤더 핑크 쿨톤 회원을 위한 쿨 핑크 베리에이션'	);
+insert into product values(	pro_seq.nextval,	'에스쁘아',	'꾸뛰르 립 틴트 샤인 헤이 베스티',	'4bestie_ttl.jpg',	'4bestie_dtl.jpg',	'여름 브라이트',	14000,	1400,	100,	0,	'속 이야기까지 거리낌 없는 찐친과의 수다시간 꾸밈없이 솔직한 브라이트 핑크'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'쥬시 래스팅 틴트 #여라 27 핑크 팝시클',	'4popsicle_ttl.jpg',	'4popsicle_dtl.jpg',	'여름 브라이트',	8400,	840,	100,	0,	'맑은 핑크에 흰 기 한 방울을 넣어 민낯에도 부담스럽지 않은 청량한 여라 핑크'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'잉크 더 에어리 벨벳 #20 미모열일',	'4mimo_ttl.jpg',	'4mimo_dtl.jpg',	'여름 브라이트',	10000,	1000,	100,	0,	'단종템 부활! 푸른빛 더해 희소성 있는 푸시아 핑크 립'	);
+insert into product values(	pro_seq.nextval,	'네이밍',	'플러피 파우더 블러쉬 야미',	'4yummy_ttl.jpg',	'4yummy_dtl.jpg',	'여름 브라이트',	15000,	1500,	100,	0,	'딸기 우윳빛 베이비 핑크'	);
+insert into product values(	pro_seq.nextval,	'더샘',	'샘물 싱글 블러셔 PP05 라이 베리',	'4berry_ttl.jpg',	'saemmul_dtl.jpg',	'여름 브라이트',	5000,	500,	100,	0,	'웜톤도 쿨톤처럼 보이게하는 리얼 화이티쉬 연보라 컬러'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'베러 댄 치크 W01 오디밀크',	'romand_ttl.jpg',	'romand_dtl.jpg',	'여름 브라이트',	9900,	990,	100,	0,	'차게 얼린 오디를 우유에 한가득, 오디 크림'	);
+insert into product values(	pro_seq.nextval,	'아리따움',	'모노아이즈 M36 러버블데이',	'4love_ttl.jpg',	'4love_dtl.jpg',	'여름 브라이트',	5000,	500,	100,	0,	'톤다운 핑크빛으로 여리한 감성의 M36 러버블데이'	);
+insert into product values(	pro_seq.nextval,	'에스쁘아',	'리얼 아이 핸디 팔레트 2호 라이트 피오니',	'4peony_ttl.jpg',	'4peony_dtl.jpg',	'여름 브라이트',	24000,	2400,	100,	0,	'사랑스러운 발레핑크 피오니'	);
+insert into product values(	pro_seq.nextval,	'16브랜드',	'마이 매거진 노스텔지어 무드 Vol.07 라일락',	'4nos_ttl.jpg',	'4nos_dtl.jpg',	'여름 브라이트',	16900,	1690,	100,	0,	'은은하게 반짝이는 라일락 꽃 컬러!'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'베러 댄 아이즈 #우유 W01 말린 라벤더',	'4lavender_ttl.jpg',	'4lavender_dtl.jpg',	'여름 브라이트',	13600,	1360,	100,	0,	'우유에 빠져 더욱 뽀얘진 보라빛 컬러'	);
+insert into product values(	pro_seq.nextval,	'맥',	'파우더 키스 립스틱 서트리니스',	'5sul_ttl.jpg',	'5sul_dtl.jpg',	'여름 뮤트',	39000,	3900,	100,	0,	'베이비 핑크'	);
+insert into product values(	pro_seq.nextval,	'힌스',	'무드인핸서 마뜨 립스틱 얼루어',	'5allure_ttl.jpg',	'5allure_dtl.jpg',	'여름 뮤트',	15200,	1520,	100,	0,	'올타임 클래식 로즈 베이지. 덤덤한 듯 밀도 있게 배어나는 핑크빛 모브 베이지가 당신의 우아함을 드러나게 합니다.'	);
+insert into product values(	pro_seq.nextval,	'에스쁘아',	'꾸뛰르 립 틴트 블러 벨벳 5호 세레나데',	'espoir_ttl.jpg',	'espoir_dtl.jpg',	'여름 뮤트',	18700,	1870,	100,	0,	'크림 한 스푼 가미된 미지근한 소프트 핑크'	);
+insert into product values(	pro_seq.nextval,	'나스',	'블러쉬 임패션드',	'5im_ttl.jpg',	'5im_dtl.jpg',	'여름 뮤트',	40500,	4050,	100,	0,	'임패션드 핑크 오키드'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'베러 댄 치크 C02 블루베리칩',	'romand_ttl.jpg',	'romand_dtl.jpg',	'여름 뮤트',	9900,	990,	100,	0,	'잘 마른 블루베리처럼 옅은 뮤트 핑크'	);
+insert into product values(	pro_seq.nextval,	'바비브라운',	'롱웨어 크림 섀도우 스틱 더스티 모브',	'5dusty_ttl.jpg',	'5dusty_dtl.jpg',	'여름 뮤트',	52000,	5200,	100,	0,	'쉬머링 라벤더'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크 팝 로지 팝',	'clinique_ttl.jpg',	'5rosie_dtl.jpg',	'여름 뮤트',	35000,	3500,	100,	0,	'-'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'올 테이크 무드 팔레트 #04 뮤트로운 우리를 봐 로즈로워',	'peripera2_ttl.jpg',	'peripera2_dtl.jpg',	'여름 뮤트',	16800,	1680,	100,	0,	'단 하나로 끝내는 올테이크 무드 팔레트'	);
+insert into product values(	pro_seq.nextval,	'홀리카홀리카',	'마이페이브 무드 아이팔레트 02 무니',	'5moony_ttl.jpg',	'5moony_dtl.jpg',	'여름 뮤트',	19600,	1960,	100,	0,	'어스름한 새벽, 마음이 몽글 몽글해지는 멀베리 색감'	);
+insert into product values(	pro_seq.nextval,	'아리따움',	'리얼 아이 팔레트 4호 모브미',	'espoir2_ttl.jpg',	'5mauve_ttl.jpg',	'여름 뮤트',	32000,	3200,	100,	0,	'맑게 빛나는 라일락 모브'	);
+insert into product values(	pro_seq.nextval,	'헤라',	'센슈얼 파우더 매트 리퀴드 499호 로지스웨이드',	'6suede_ttl.jpg',	'6suede_dtl.jpg',	'가을 뮤트',	36000,	3600,	100,	0,	'#로지브라운'	);
+insert into product values(	pro_seq.nextval,	'포렌코즈',	'타투 끌레르 벨벳 틴트 19 모스',	'forencos2_ttl.jpg',	'6moss_dtl.jpg',	'가을 뮤트',	10900,	1090,	100,	0,	'노을은 뉘엿뉘엿, 들판에 한들한 코랄 한 송이, 코랄 베이지'	);
+insert into product values(	pro_seq.nextval,	'3CE',	'블러 워터 틴트 #LAYDOWN',	'6lay_ttl.jpg',	'6lay_dtl.jpg',	'가을 뮤트',	11900,	1190,	100,	0,	'오묘한 다운 톤 핑크 브라운 베이스'	);
+insert into product values(	pro_seq.nextval,	'에스쁘아',	'꾸뛰르 립 틴트 블러 벨벳 2호 문릿',	'espoir_ttl.jpg',	'espoir_dtl.jpg',	'가을 뮤트',	18700,	1870,	100,	0,	'누가 발라도 실패 없는 말린장미 에스쁘아 대표 MLBB'	);
+insert into product values(	pro_seq.nextval,	'더샘',	'샘물 싱글 블러셔 BE02 플래시 베이지',	'6flash_ttl.jpg',	'saemmul_dtl.jpg',	'가을 뮤트',	5000,	500,	100,	0,	'은은한 금 펄이 포함되어 건강한 느낌을 연출하는 톤 다운 베이지 컬러'	);
+insert into product values(	pro_seq.nextval,	'3CE',	'페이스 블러쉬 #NUDE PEACH',	'6nude_ttl.jpg',	'6nude_dtl.jpg',	'가을 뮤트',	14400,	1440,	100,	0,	'은은하고 부드러운 클래식 누드 피치'	);
+insert into product values(	pro_seq.nextval,	'나스',	'블러쉬 지나',	'6gina_ttl.jpg',	'6gina_dtl.jpg',	'가을 뮤트',	40500,	4050,	100,	0,	'매트 탠저린'	);
+insert into product values(	pro_seq.nextval,	'투쿨포스쿨',	'아트클래스 바이로댕 콜렉터즈 #1 브라운',	'6brown_ttl.jpg',	'6brown_dtl.jpg',	'가을 뮤트',	14900,	1490,	100,	0,	'브라운 베이스의 팔레트로 깊고 입체적인 눈매 연출 브라운 데일리 음영 메이크업'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'베러 댄 아이즈 #빛바랜음영 N01 말린 버들꽃',	'6willow_ttl.jpg',	'6willow_dtl.jpg',	'가을 뮤트',	13600,	1360,	100,	0,	'진하지 않은 부드러운 베이지 빛 음영'	);
+insert into product values(	pro_seq.nextval,	'데이지크',	'섀도우 팔레트 12 웜블렌딩',	'6warm_ttl.jpg',	'6warm_dtl.jpg',	'가을 뮤트',	27200,	2720,	100,	0,	'웜톤을 위한 베이직 컬러를 은은하게 우려낸 시나몬티 무펄 팔레트'	);
+insert into product values(	pro_seq.nextval,	'삐아',	'라스트 벨벳 틴트 V12 다정보스',	'bbia_ttl.jpg',	'7boss_dtl.jpg',	'가을 스트롱',	8800,	880,	100,	0,	'미드 톤의 오렌지 브라운'	);
+insert into product values(	pro_seq.nextval,	'포렌코즈',	'타투 끌레르 벨벳 틴트 05 브랭',	'forencos2_ttl.jpg',	'7brun_dtl.jpg',	'가을 스트롱',	10900,	1090,	100,	0,	'100일 말린 단풍 잎을 톡, 메이플 로즈'	);
+insert into product values(	pro_seq.nextval,	'맥',	'매트 립스틱 칠리',	'7chilly_ttl.jpg',	'7chilly_dtl.jpg',	'가을 스트롱',	39000,	3900,	100,	0,	'Warm brick red'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'잉크 더 벨벳 #1 브릭부심',	'peripera3_ttl.jpg',	'peripera3_dtl.jpg',	'가을 스트롱',	8000,	800,	100,	0,	'컬러 하나로 자신감 200% 입술 부심 넘치는 브릭 버건디'	);
+insert into product values(	pro_seq.nextval,	'에뛰드하우스',	'룩 앳 마이 아이즈 카페 BR405 까페라떼 우유많이',	'cafe_ttl.jpg',	'cafe_dtl.jpg',	'가을 스트롱',	4000,	400,	100,	0,	'까페라떼에 우유를 더 부은듯한 밀키 레드브라운 음영 컬러'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크 팝 누드 팝',	'clinique_ttl.jpg',	'7nude_dtl.jpg',	'가을 스트롱',	35000,	3500,	100,	0,	'-'	);
+insert into product values(	pro_seq.nextval,	'나스',	'블러쉬 러스터',	'7luster_ttl.jpg',	'7luster_dtl.jpg',	'가을 스트롱',	40500,	4050,	100,	0,	'골든 쉬어 살구색'	);
+insert into product values(	pro_seq.nextval,	'에뛰드하우스',	'룩 앳 마이 아이즈 BR402 시럽빼고 테이크아웃',	'7syrup_ttl.jpg',	'7syrup_dtl.jpg',	'가을 스트롱',	4000,	400,	100,	0,	'골드 펄이 함유된 브라운 쉬머 베이스로 삼각존, 라인, 음영 어디든 사용 가능한 베스트 컬러'	);
+insert into product values(	pro_seq.nextval,	'클리오',	'프로 아이 팔레트 02 브라운슈',	'7choux_ttl.jpg',	'7choux_dtl.jpg',	'가을 스트롱',	25500,	2550,	100,	0,	'베이직하고 시크한 골드 브라운'	);
+insert into product values(	pro_seq.nextval,	'3CE',	'멀티 아이 컬러 팔레트 #PLOT TWIST',	'7plot_ttl.jpg',	'7plot_dtl.jpg',	'가을 스트롱',	31590,	3159,	100,	0,	'그윽하고 또렷한 눈매를 연출해주는 부드럽고 스윗한 피넛 브라운'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'제로 벨벳 틴트 #오리지널 02 조이풀',	'8joyful_ttl.jpg',	'8joyful_dtl.jpg',	'가을 딥',	8900,	890,	100,	0,	'사람들 모두에게 즐거운 경험을 선사해 줄, MLBB 붉은 벽돌 컬러'	);
+insert into product values(	pro_seq.nextval,	'3CE',	'벨벳 립 틴트 #TAUPE',	'8taupe_ttl.jpg',	'8taupe_dtl.jpg',	'가을 딥',	13600,	1360,	100,	0,	'버건디를 철저히 배제한 진한 베이지 무드의 브릭 레드 컬러'	);
+insert into product values(	pro_seq.nextval,	'바비브라운',	'립칼라 번트 레드',	'8burnt_ttl.jpg',	'8burnt_dtl.jpg',	'가을 딥',	50000,	5000,	100,	0,	'벽돌빛의 붉은 색상'	);
+insert into product values(	pro_seq.nextval,	'맥',	'파우더 블러쉬 멜바',	'8mel_ttl.jpg',	'8mel_dtl.jpg',	'가을 딥',	36000,	3600,	100,	0,	'코랄빛 피치'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크 팝 피그 팝',	'clinique_ttl.jpg',	'8fig_dtl.jpg',	'가을 딥',	35000,	3500,	100,	0,		);
+insert into product values(	pro_seq.nextval,	'페리페라',	'맑게 물든 선샤인 치크 17 인간가을해',	'peripera_ttl.jpg',	'peripera_dtl.jpg',	'가을 딥',	6400,	640,	100,	0,	'분위기 뭐야! 완전 인간가을 그 자체♡ 가을의 무드를 담은 따스한 핑크 브라운'	);
+insert into product values(	pro_seq.nextval,	'롬앤 ',	'베러 댄 치크 C04 페어칩',	'romand_ttl.jpg',	'romand_dtl.jpg',	'가을 딥',	9900,	990,	100,	0,	'바짝 말린 배 껍질에 생기 한 방울, 베이지 브라운'	);
+insert into product values(	pro_seq.nextval,	'에뛰드하우스',	'플레이 컬러 아이즈 #베이크하우스',	'8bake_ttl.jpg',	'8bake_dtl.jpg',	'가을 딥',	28000,	2800,	100,	0,	'매일 아침 갓 구운 빵들이 가득한 베이커리 컬러를 담은 팔레트'	);
+insert into product values(	pro_seq.nextval,	'데이지크',	'섀도우 팔레트 11 초콜릿 퍼지',	'8fudge_ttl.jpg',	'8fudge_dtl.jpg',	'가을 딥',	27200,	2720,	100,	0,	'깊고 그윽한 초콜릿 브라운 무드를 담은 데이지크 아이 팔레트'	);
+insert into product values(	pro_seq.nextval,	'릴리바이레드',	'무드키보드 03 #당신의 최애 애쉬 올림',	'8ash_ttl.jpg',	'8ash_dtl.jpg',	'가을 딥',	21900,	2190,	100,	0,	'카키빛 뉴트럴 애쉬 컬러의 뉴트럴톤 섀도우 팔레트'	);
+insert into product values(	pro_seq.nextval,	'웨이크메이크',	'소프트 블러링 아이팔레트 02 생기블러링',	'9blur_ttl.jpg',	'9blur_dtl.jpg',	'겨울 브라이트',	23800,	2380,	100,	0,	'#로즈빛_생기음영'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'블러 퍼지 틴트 #에너제틱 브라이트 11 푸시아 바이브',	'9puchsia_ttl.jpg',	'9puchsia_dtl.jpg',	'겨울 브라이트',	13000,	1300,	100,	0,	'서늘한 푸시아가 담긴 리얼 쿨톤 핑크'	);
+insert into product values(	pro_seq.nextval,	'맥',	'매트 립스틱 레드 락',	'9red_ttl.jpg',	'9red_dtl.jpg',	'겨울 브라이트',	36000,	3600,	100,	0,	'클래식 레드'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'잉크 더 벨벳 #16 하트백만개',	'peripera3_ttl.jpg',	'peripera3_dtl.jpg',	'겨울 브라이트',	8000,	800,	100,	0,	'쿨 핑크가 돌아왔다! 더 이상 헤페지 않아도 되는 쿨톤 정착 레드 푸시아 핑크'	);
+insert into product values(	pro_seq.nextval,	'릴리바이레드',	'러브빔 치크밤 02 #순수빔',	'9soonsoo_ttl.jpg',	'9soonsoo_dtl.jpg',	'겨울 브라이트',	8400,	840,	100,	0,	'뽀용함 초과! 딸기우유빛으로 더 순수하게 밀키 핑크'	);
+insert into product values(	pro_seq.nextval,	'삐아',	'라스트 블러쉬 02 라벤더 블로썸',	'bbia2_ttl.jpg',	'bbia2_dtl.jpg',	'겨울 브라이트',	6175,	618,	100,	0,	'조명 ON! 청량한 라이트 라벤더'	);
+insert into product values(	pro_seq.nextval,	'언리시아',	'글리터피디아 NO.4 올오브 라벤더 포그',	'9fog_ttl.jpg',	'9fog_dtl.jpg',	'겨울 브라이트',	34000,	3400,	100,	0,	'라벤더 빛 베이스에 보라빛 실버 글리터로 신비롭고 투명하게 연출하는 글리터룩'	);
+insert into product values(	pro_seq.nextval,	'맥',	'레트로 매트 립스틱 릴렌트리슬리 레드',	'9retro_ttl.jpg',	'9retro_dtl.jpg',	'겨울 브라이트',	36000,	3600,	100,	0,	'밝은 핑크빛 코랄'	);
+insert into product values(	pro_seq.nextval,	'에스쁘아',	'리얼 아이 팔레트 6호 플럼소다',	'espoir2_ttl.jpg',	'9plum_dtl.jpg',	'겨울 브라이트',	32000,	3200,	100,	0,	'청량함이 터지는 플럼빛 체리 에이드'	);
+insert into product values(	pro_seq.nextval,	'삐아',	'라스트 블러쉬 05 베리 블로썸',	'bbia2_ttl.jpg',	'bbia2_dtl.jpg',	'겨울 브라이트',	6175,	618,	100,	0,	'상큼 폭발, 팝한 베리 핑크'	);
+insert into product values(	pro_seq.nextval,	'맥',	'레트로 매트 립스틱 플랫 아웃 패뷸러스',	'10fab_ttl.jpg',	'10fab_dtl.jpg',	'겨울 딥',	36000,	3600,	100,	0,	'밝은 자주'	);
+insert into product values(	pro_seq.nextval,	'맥',	'파우더 키스 리퀴드 버닝 러브',	'10burning_ttl.jpg',	'10burning_dtl.jpg',	'겨울 딥',	43000,	4300,	100,	0,	'Deep intense berry'	);
+insert into product values(	pro_seq.nextval,	'릴리바이레드',	'쥬시 라이어 워터 틴트 04 #블랙베리 데낄라인 척',	'10black_ttl.jpg',	'10black_dtl.jpg',	'겨울 딥',	9100,	910,	100,	0,	'깊이 있는 오묘함, 블러디 레드'	);
+insert into product values(	pro_seq.nextval,	'포렌코즈',	'타투 끌레르 벨벳 틴트 03 뮈니',	'forencos2_ttl.jpg',	'10minuit_dtl.jpg',	'겨울 딥',	10900,	1090,	100,	0,	'아찔하게 물드는 팝 핑크'	);
+insert into product values(	pro_seq.nextval,	'릴리바이레드',	'글리터존 샤워 05 스노우펄 샤워',	'10perl_ttl.jpg',	'10perl_dtl.jpg',	'겨울 딥',	5900,	590,	100,	0,	'골드, 그린, 블루, 홀로그램 펄이 조합된 클리어 화이트'	);
+insert into product values(	pro_seq.nextval,	'크리니크',	'치크 팝 팬지 팝',	'clinique_ttl.jpg',	'10pansy_dtl.jpg',	'겨울 딥',	35000,	3500,	100,	0,	'-'	);
+insert into product values(	pro_seq.nextval,	'페리페라',	'올 테이크 무드 팔레트 #11 포브스 선정 제법 젠쿨한 핑크',	'peripera2_ttl.jpg',	'peripera2_dtl.jpg',	'겨울 딥',	16800,	1680,	100,	0,	'단 하나로 끝내는 올테이크 무드 팔레트'	);
+insert into product values(	pro_seq.nextval,	'롬앤',	'베러 댄 아이즈 #뮤직 M02 말린 메밀꽃',	'10memil_ttl.jpg',	'10memil_dtl.jpg',	'겨울 딥',	13600,	1360,	100,	0,	'차가운 메밀처럼 쿨하디 쿨한 붉은기 없는 회갈색 컬러'	);
+insert into product values(	pro_seq.nextval,	'미샤',	'라스트 블러쉬 06 로즈블로썸',	'bbia2_ttl.jpg',	'bbia2_dtl.jpg',	'겨울 딥',	6175,	618,	100,	0,	'고혹적 무드의 말린 장미'	);
+insert into product values(	pro_seq.nextval,	'3CE',	'소프트 매트 립스틱 #AZURE PINK',	'10azure_ttl',	'10azure_dtl.jpg',	'겨울 딥',	14900,	1490,	100,	0,	'푸른 빛에 반사되어 맑게 차오르는 브라이트 핑크'	);
+
+commit;
+select * from product;

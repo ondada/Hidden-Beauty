@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlField_user">
+	<insert id="register">
+		insert into users
+		values(#{u_id}, #{u_name}, #{u_password}, #{u_phone}, #{u_address}, 
+		0, '미정', #{u_jointype}, default, 
+		#{u_color}, #{u_email}, #{u_profileimg}, #{u_intro}, #{u_report})
+	</insert>
+	<select id="getUserById" resultType="Users">
+		select * from users
+		where u_id=#{u_id}
+	</select>
+	<select id="findId" resultType="Users">
+		select u_id from users
+		where u_name=#{u_name} and u_phone=#{u_phone}
+	</select>
+	<select id="findU_id" resultType="int">
+		select count(*) from users where u_id = #{u_id}
+	</select>
+	<select id="findPw" resultType="String">
+		select u_password from users
+		where u_name=#{u_name} and u_id=#{u_id} and u_phone=#{u_phone}
+	</select>
+	<insert id="insertFeedback">
+		insert into feedback values(feedback_seq.nextval, #{u_id}, #{u_jointype}, #{fb_content}, #{fb_requestApi})
+	</insert>
+	<insert id="insertRestore">
+		insert into restore values(restore_seq.nextval,#{u_id}, #{u_email}, #{rs_content}, default, 'N')
+	</insert>
+	<update id="updateUsers">
+		update users
+		set u_phone=#{u_phone}, u_address=#{u_address}, u_color=#{u_color}, u_email=#{u_email}, u_profileimg = #{u_profileimg}, u_intro = #{u_intro}
+		where u_id=#{u_id}
+	</update>
+		<update id="updatePassword">
+		update users
+		set u_password=#{new_password}
+		where u_id=#{u_id}
+	</update>
+	<update id="updateColor">
+		update users
+		set u_color=#{personalColor}
+		where u_id=#{u_id}
+	</update>
+	<update id="updateReport">
+		update users set u_report = u_report+1 where u_id = #{u_id}
+	</update>
+	<delete id="deleteUsers">
+		delete users
+		where u_id=#{u_id}
+	</delete>
+</mapper>

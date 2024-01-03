@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlField_product">
+	<select id="getTotalCount" resultType="int">
+		select count(*) from product
+		
+		<if test="whatColumn=='p_brand'">
+		where p_brand like #{keyword}
+		</if>
+		
+		<if test="whatColumn=='p_name'">
+		where p_name like #{keyword}
+		</if>
+		
+		<if test="whatColumn=='p_color'">
+		where p_color like #{keyword}
+		</if>
+		
+		<if test="whatColumn=='all'">
+		where p_brand like #{keyword} or p_name like #{keyword} or p_color like #{keyword}
+		</if>
+		
+	</select>
+	
+	<select id="getAllProductList" resultType="myProduct">
+		select * from product 
+		
+		<if test="whatColumn=='p_brand'">
+		where p_brand like #{keyword} 
+		</if>
+		
+		<if test="whatColumn=='p_name'">
+		where p_name like #{keyword} 
+		</if>
+		
+		<if test="whatColumn=='p_color'">
+		where p_color like #{keyword} 
+		</if>
+		
+		<if test="whatColumn=='all'">
+		where p_brand like #{keyword} or p_name like #{keyword} or p_color like #{keyword} 
+		</if>
+		
+		<if test="filter=='priceH'">
+		order by p_price desc
+		</if>
+		
+		<if test="filter=='priceL'">
+		order by p_price
+		</if>
+		 
+	</select>
+	
+	<select id="getSelectOne" resultType="myProduct">
+		select * from product
+		where p_num = #{p_num}
+	</select>
+	<select id="getBestProduct" resultType="myProduct">
+		select rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from(
+		select rownum as rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from (
+		select p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from product order by p_salevolume desc))
+		where rank between 0 and 8
+	</select>
+	<select id="getNewProduct" resultType="myProduct">
+		select rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from(
+		select rownum as rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from (
+		select p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from product order by p_num desc))
+		where rank between 0 and 8
+	</select>
+	<select id="getBestProductList" resultType="myProduct">
+		select rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from(
+		select rownum as rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from (
+		select p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from product order by p_salevolume desc))
+		where rank between 0 and 20
+	</select>
+	<select id="getNewProductList" resultType="myProduct">
+		select rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from(
+		select rownum as rank, p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from (
+		select p_num, p_brand, p_name, p_ttlimg, p_price, p_point, p_salevolume from product order by p_num desc))
+		where rank between 0 and 20
+	</select>
+</mapper>

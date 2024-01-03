@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlField_color">
+	<select id="getColor" resultType="color.model.ColorBean">
+		select * from color 
+		<if test="color == 'sl'">where col_name = '봄 라이트'</if>
+		<if test="color == 'sb'">where col_name = '봄 브라이트'</if>
+		<if test="color == 'sml'">where col_name = '여름 라이트'</if>
+		<if test="color == 'smb'">where col_name = '여름 브라이트'</if>
+		<if test="color == 'sm'">where col_name = '여름 뮤트'</if>
+		<if test="color == 'am'">where col_name = '가을 뮤트'</if>
+		<if test="color == 'as'">where col_name = '가을 스트롱'</if>
+		<if test="color == 'ad'">where col_name = '가을 딥'</if>
+		<if test="color == 'wb'">where col_name = '겨울 브라이트'</if>
+		<if test="color == 'wd'">where col_name = '겨울 딥'</if>
+	</select>
+</mapper>

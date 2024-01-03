@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/java/c_board/controller/CBoardListController.java=UTF-8
+encoding//src/main/java/mall/controller/OrderCompletedController.java=UTF-8
+encoding//src/main/java/mall/controller/kakaoCompletedController.java=UTF-8
+encoding//src/main/java/users/controller/UsersLoginController.java=UTF-8
+encoding//src/main/java/users/controller/UsersMypageController.java=UTF-8
+encoding//src/main/java/users/controller/UsersUpdateController.java=UTF-8
+encoding//src/main/java/utility/KakaoApi.java=UTF-8
+encoding//src/main/java/utility/NaverApi.java=UTF-8
+encoding//src/main/java/utility/Paging.java=UTF-8
+encoding//src/main/webapp/NewFile.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/q_board/qBoardDetail.jsp=UTF-8
+encoding/<project>=UTF-8

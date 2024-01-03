@@ -1,0 +1,57 @@
+@charset "UTF-8";
+img{
+	width: 100%;
+	object-fit: cover;
+}
+.profile-container{
+	display: flex;
+	flex-direction: column;
+}
+.main-container{ /* profile-container의 flex item */
+	display: flex;
+	flex-wrap: wrap;
+}
+.img-box{ /* main-container의 flex item */
+	flex-basis: 40%;
+}
+.explain-box{ /* main-container의 flex item */
+	flex-basis: 60%;
+}
+.board-container{ /* profile-container의 flex item */
+	flex-basis: 70%;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	/* justify-content: center;
+	align-item: center; */
+}
+.list-box{ /* board-container의 flex item */
+	/* flex-basis: 100%; */
+	flex-basis: 600px;
+	height: 80%;
+	margin: 0 auto;
+} 
+.on, .off{ /* board-container의 flex item */
+	margin-top: 5%;
+}
+.on {
+	color: #7C81BB;
+	text-decoration: underline 8px;
+	text-underline-offset : 10px;
+}
+.on:hover, .off:hover{
+	cursor: pointer;
+}
+
+@font-face {
+    font-family: 'MaruBuri-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} 
+@font-face {
+    font-family: 'RIDIBatang'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

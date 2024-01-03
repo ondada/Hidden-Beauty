@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlField_mall">
+	
+	<insert id="insertTemp" parameterType="myTempCart" >
+		insert into temp_cart
+			values(#{cart_num}, #{p_num}, #{cart_qty})
+	</insert>
+	
+	<select id="selectTemp" resultType="myTempCart">
+		select p_num, cart_qty from temp_cart
+		where cart_num = #{cart_num}
+	</select>
+	
+	<select id="selectProd" resultType="myProduct">
+		select p_name, p_price, p_point from product
+		where p_num = #{p_num}
+	</select>
+	
+	<select id="getPriceByPnum" resultType="int">
+		select p_price from product where p_num = #{p_num}
+	</select>
+	
+	<select id="selectUser" resultType="Users"> 
+		select u_name, u_phone, u_id, u_address from users
+		where u_id = #{u_id}
+	</select>
+	
+	<select id="getCartInfo" resultType="mall.model.OrdersProduct">
+		select * from ordersProduct where o_num = #{o_num}
+	</select>
+	
+	<select id="getOrdersByU_id" resultType="mall.model.OrderBean">
+		select * from orders where u_id = #{u_id} order by o_num desc
+	</select>
+	
+	<select id="getOrdersCountByU_id" resultType="int">
+		select count(*) from orders where u_id = #{u_id}
+	</select>
+
+	<select id="getAllOrdersProduct2"
+		resultType="mall.model.OrdersProductBean">
+		select * from ordersProduct
+		where o_num = #{o_num}
+	</select>
+
+	<select id="selectPord2" resultType="myProduct">
+		select p_name, p_price, p_num, p_point from product
+		where p_num = #{p_num}
+	</select>
+
+	<select id="getOneOrder2" resultType="mall.model.OrderBean">
+		select * from orders
+		where o_num = #{o_num}
+	</select>
+	
+	<delete id="deleteTemp">
+		delete from temp_cart where cart_num = #{cart_num}
+	</delete>
+	
+	<insert id="insertOrderProd">
+		insert into ordersProduct
+			values(#{o_num}, #{p_num}, #{cart_qty})
+	</insert>
+	
+	<insert id="insertOrderInfo">
+		insert into orders
+			values(#{o_num},#{u_id},#{o_phone},#{o_name},#{o_message},#{o_addr},
+			#{o_date},#{o_status},#{o_totalamount},#{pay_bank},#{pay_name},#{way})
+	</insert>
+	
+	<select id="selectMaxO_num" resultType="int">
+		select MAX(o_num) from orders
+	</select>
+	
+	<select id="selectCart" resultType="int">
+		select count(*) from cart
+			where cart_num = #{cart_num} and p_num = #{p_num}
+	</select>
+	
+	<update id="updateCart">
+		update cart set cart_qty = cart_qty + #{cart_qty} 
+			where cart_num = #{cart_num} and p_num = #{p_num}
+	</update>
+	
+	<update id="updateCartQty">
+		update cart set cart_qty = #{cart_qty} 
+			where cart_num = #{cart_num} and p_num = #{p_num}
+	</update>
+	
+	<insert id="insertCart">
+		insert into cart 
+			values(#{cart_num},#{p_num},#{cart_qty})
+	</insert>
+	
+	<select id="selectCart2" resultType="mall.model.CartBean">
+		select p_num, cart_qty from cart
+			where cart_num = #{cart_num} 
+	</select>
+	
+	<select id="selectPord" resultType="myProduct">
+		select p_name, p_price, p_num, p_stock from product
+			where p_num = #{p_num} 
+	</select>
+	
+	<delete id="deleteCart">
+		delete from cart where p_num = #{p_num}
+	</delete>
+	
+	<delete id="deleteAllCart">
+		delete from cart where cart_num = #{cart_num} 
+	</delete>
+	
+	<update id="downStockPord">
+		update product set p_stock = p_stock-#{cart_qty} 
+			where p_num = #{p_num}
+	</update>
+	
+	<update id="upSalevolumePord">
+		update product set p_salevolume = p_salevolume + #{cart_qty} 
+			where p_num = #{p_num}
+	</update>
+	
+	<select id="selectOrders" resultType="mall.model.OrderBean">
+		select * from orders
+			where o_num = #{o_num} 
+	</select>
+	
+	
+	<select id="selectPoint" resultType="int">
+		select p_point from product
+			where p_num = #{p_num} 
+	</select>
+	
+	<delete id="deleteOrder">
+		delete from orders where o_num = #{o_num}
+	</delete>
+	
+	<delete id="deleteOrderProd">
+		delete from ordersProduct where o_num = #{o_num}
+	</delete>
+</mapper>

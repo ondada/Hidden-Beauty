@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="celeb.model.CelebBean">
+	<select id="getCeleb" resultType="celeb.model.CelebBean">
+		select * from celeb
+		<if test="cl_color == '봄 라이트'">where cl_color = '봄 라이트'</if>
+		<if test="cl_color == '봄 브라이트'">where cl_color = '봄 브라이트'</if>
+		<if test="cl_color == '여름 라이트'">where cl_color = '여름 라이트'</if>
+		<if test="cl_color == '여름 브라이트'">where cl_color = '여름 브라이트'</if>
+		<if test="cl_color == '여름 뮤트'">where cl_color = '여름 뮤트'</if>
+		<if test="cl_color == '가을 뮤트'">where cl_color = '가을 뮤트'</if>
+		<if test="cl_color == '가을 스트롱'">where cl_color = '가을 스트롱'</if>
+		<if test="cl_color == '가을 딥'">where cl_color = '가을 딥'</if>
+		<if test="cl_color == '겨울 브라이트'">where cl_color = '겨울 브라이트'</if>
+		<if test="cl_color == '겨울 딥'">where cl_color = '겨울 딥'</if>
+	</select>
+	
+		<select id="getTotalCount" resultType="int">
+		select count(*) from celeb
+		
+		<if test="whatColumn=='cl_color'">
+		where cl_color like #{keyword}
+		</if>
+		
+	</select>
+	
+	<select id="getAllCelebList" resultType="celebDao">
+		select * from celeb
+		
+		<if test="whatColumn=='cl_color'">
+		where cl_color like #{keyword}
+		</if>
+		 
+	</select>
+	
+	<select id="getSelectOne" resultType="celebDao">
+		select * from celeb
+		where cl_num = #{cl_num}
+	</select>
+</mapper>

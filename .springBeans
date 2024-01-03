@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.18.202109140629-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/color-servlet.xml</config>
+	</configs>
+	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/celeb-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/user-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/product-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/company-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/mall-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/c_board-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/q_board-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/root-context.xml</config>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

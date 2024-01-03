@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias type="company.model.CompanyBean" alias="myCompany"/>
+		<typeAlias type="mall.model.TempCart" alias="myTempCart"/>
+		<typeAlias type="mall.model.OrderBean" alias="myOrder"/>
+ 		<typeAlias type="product.model.ProductBean" alias="myProduct"/>
+		<typeAlias type="c_board.model.CBoardBean" alias="CBoard"/>
+		<typeAlias type="q_board.model.QBoardBean" alias="QBoard"/>
+		<typeAlias type="users.model.UsersBean" alias="Users"/>
+		<typeAlias type="celeb.model.CelebBean" alias="celebDao"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mybatis/celeb.xml"/>
+		<mapper resource="mybatis/company.xml"/>
+		<mapper resource="mybatis/user.xml"/>
+		<mapper resource="mybatis/product.xml"/>
+		<mapper resource="mybatis/color.xml"/> 
+		<mapper resource="mybatis/mall.xml"/>
+		<mapper resource="mybatis/c_board.xml"/>
+		<mapper resource="mybatis/q_board.xml"/>
+		<mapper resource="mybatis/admin.xml"/>
+	</mappers>
+</configuration>
+
+ 
